@@ -1,0 +1,35 @@
+import Link from "next/link";
+import { cn } from "@/lib/cn";
+
+type ButtonLinkProps = {
+  href: string;
+  children: React.ReactNode;
+  variant?: "primary" | "secondary" | "text";
+  className?: string;
+  external?: boolean;
+};
+
+export function ButtonLink({ href, children, variant = "primary", className, external }: ButtonLinkProps) {
+  const base =
+    "group inline-flex min-h-11 items-center justify-center gap-2 rounded-sm font-body text-sm font-semibold transition duration-medium ease-enter focus-visible:outline-muted-gold";
+  const variants = {
+    primary: "bg-wine px-6 py-3 text-programme-white hover:bg-wine-bright",
+    secondary:
+      "border border-current bg-transparent px-6 py-3 text-programme-white hover:border-muted-gold hover:text-muted-gold",
+    text: "min-h-0 justify-start p-0 font-mono text-xs uppercase tracking-[0.12em] text-current underline-offset-4 hover:text-muted-gold"
+  };
+
+  return (
+    <Link
+      className={cn(base, variants[variant], className)}
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+    >
+      <span>{children}</span>
+      <span aria-hidden="true" className="transition-transform duration-medium ease-enter group-hover:translate-x-1">
+        →
+      </span>
+    </Link>
+  );
+}

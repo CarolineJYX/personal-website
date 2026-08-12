@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-stage-black: #0a0908;
+  --color-stage-surface: #12100f;
+  --color-stage-elevated: #1d1916;
+  --color-programme-ivory: #f2ebdd;
+  --color-programme-white: #f8f4ec;
+  --color-ink: #1e1a17;
+  --color-text-primary: #f5efe4;
+  --color-text-secondary: #b7aea2;
+  --color-wine: #6f1822;
+  --color-wine-bright: #942633;
+  --color-muted-gold: #b09a6a;
+  --color-line-dark: #39322d;
+  --color-line-light: #cfc5b6;
+  --color-success: #52705b;
+  --color-warning: #9b6b38;
+  --color-error: #963d3d;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", "Noto Serif SC", "Source Han Serif SC", serif;
+  --font-body: var(--font-inter), "Inter", "Noto Sans SC", "Source Han Sans SC", system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-40: 10rem;
+
+  --radius-none: 0;
+  --radius-small: 2px;
+  --radius-card: 4px;
+  --radius-pill: 999px;
+
+  --duration-instant: 80ms;
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-medium: 280ms;
+  --duration-slow: 600ms;
+  --duration-scene: 900ms;
+
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-scene: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --content-max: 1280px;
+  --reading-max: 720px;
+  --page-gutter-desktop: 64px;
+  --page-gutter-tablet: 32px;
+  --page-gutter-mobile: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 1ms;
+    --duration-fast: 1ms;
+    --duration-base: 1ms;
+    --duration-medium: 1ms;
+    --duration-slow: 1ms;
+    --duration-scene: 1ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+html {
+  background: var(--color-stage-black);
+  color: var(--color-text-primary);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--color-stage-black);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-wine);
+  color: var(--color-programme-white);
+}
+
+a {
+  text-underline-offset: 4px;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-muted-gold);
+  outline-offset: 4px;
+}
+
+[data-i18n="zh"] {
+  display: none;
+}
+
+html[data-locale="zh"] [data-i18n="en"] {
+  display: none;
+}
+
+html[data-locale="zh"] [data-i18n="zh"] {
+  display: inline;
+}
+
+html[data-locale="en"] [data-i18n="zh"] {
+  display: none;
+}
+
+.site-shell {
+  width: min(100% - (var(--page-gutter-mobile) * 2), var(--content-max));
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .site-shell {
+    width: min(100% - (var(--page-gutter-tablet) * 2), var(--content-max));
+  }
+}
+
+@media (min-width: 1280px) {
+  .site-shell {
+    width: min(100% - (var(--page-gutter-desktop) * 2), var(--content-max));
+  }
+}
+
+.stage-glow {
+  background:
+    radial-gradient(circle at 25% 18%, rgba(111, 24, 34, 0.2), transparent 32%),
+    radial-gradient(circle at 78% 22%, rgba(176, 154, 106, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(10, 9, 8, 0.5), var(--color-stage-black));
+}
+
+.programme-shadow {
+  box-shadow: 0 16px 40px rgba(30, 26, 23, 0.08);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: 16px;
+  z-index: 100;
+  transform: translateY(-160%);
+  border-radius: var(--radius-small);
+  background: var(--color-programme-white);
+  color: var(--color-ink);
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  transition: transform var(--duration-base) var(--ease-enter);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
