@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/button-link";
@@ -45,7 +46,9 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
     { label: { en: "Date", zh: "时间" }, value: project.dateRange ?? project.year },
     { label: { en: "Role", zh: "角色" }, value: project.role },
     { label: { en: "Organization", zh: "组织" }, value: project.organization },
-    { label: { en: "Status", zh: "状态" }, value: project.confidential ? { en: "Public summary", zh: "公开摘要" } : project.status }
+    { label: { en: "Status", zh: "状态" }, value: project.confidential ? { en: "Public summary", zh: "公开摘要" } : project.status },
+    { label: { en: "Award", zh: "获奖" }, value: project.award },
+    { label: { en: "Launch", zh: "上线状态" }, value: project.launchStatus }
   ];
 
   return (
@@ -126,6 +129,59 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
                 </article>
               </Reveal>
             ))}
+          </div>
+        </section>
+      ) : null}
+
+      {project.gallery?.length || project.resources?.length ? (
+        <section className="border-t border-line-dark bg-stage-surface py-16 text-text-primary md:py-24">
+          <div className="site-shell space-y-10">
+            <Reveal>
+              <h2 className="font-display text-4xl font-medium md:text-5xl">
+                <LocalizedText value={{ en: "Media & Resources", zh: "媒体资料" }} />
+              </h2>
+            </Reveal>
+            {project.gallery?.length ? (
+              <div className="grid gap-8">
+                {project.gallery.map((media) => (
+                  <Reveal key={media.src}>
+                    <figure className="overflow-hidden rounded border border-line-dark bg-stage-black">
+                      {media.type === "image" ? (
+                        <Image
+                          alt={getLocalizedText(media.alt)}
+                          className="h-auto w-full"
+                          height={1080}
+                          sizes="(min-width: 1280px) 1152px, 100vw"
+                          src={media.src}
+                          width={1920}
+                        />
+                      ) : (
+                        <video className="aspect-video w-full bg-black" controls playsInline poster={media.poster} preload="metadata">
+                          <source src={media.src} />
+                          <LocalizedText value={{ en: "Your browser does not support video playback.", zh: "你的浏览器不支持视频播放。" }} />
+                        </video>
+                      )}
+                      {media.caption ? (
+                        <figcaption className="border-t border-line-dark px-5 py-4 text-sm leading-6 text-text-secondary">
+                          <LocalizedText value={media.caption} />
+                        </figcaption>
+                      ) : null}
+                    </figure>
+                  </Reveal>
+                ))}
+              </div>
+            ) : null}
+            {project.resources?.length ? (
+              <Reveal>
+                <div className="flex flex-wrap gap-4">
+                  {project.resources.map((resource) => (
+                    <ButtonLink external href={resource.href} key={resource.href} variant="secondary">
+                      <LocalizedText value={resource.label} />
+                    </ButtonLink>
+                  ))}
+                </div>
+              </Reveal>
+            ) : null}
           </div>
         </section>
       ) : null}

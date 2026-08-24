@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/data/types";
 import { cn } from "@/lib/cn";
@@ -22,11 +23,23 @@ export function ProjectCard({ project, size = "regular" }: ProjectCardProps) {
       )}
       href={getProjectCaseHref(project)}
     >
-      <MediaPlaceholder
-        className="aspect-auto h-[250px] rounded-none border-0 border-b border-line-dark transition duration-medium group-hover:brightness-110 md:aspect-[3/2] md:h-auto md:min-h-[320px]"
-        label={project.title}
-        ratio="3:2"
-      />
+      {project.coverImage ? (
+        <div className="relative aspect-[3/2] min-h-[250px] overflow-hidden border-b border-line-dark md:min-h-[320px]">
+          <Image
+            alt={project.coverAlt?.en ?? project.title.en}
+            className="object-cover transition duration-medium group-hover:scale-[1.02] group-hover:brightness-110"
+            fill
+            sizes={wide ? "(min-width: 768px) 58vw, 100vw" : "(min-width: 768px) 42vw, 100vw"}
+            src={project.coverImage}
+          />
+        </div>
+      ) : (
+        <MediaPlaceholder
+          className="aspect-auto h-[250px] rounded-none border-0 border-b border-line-dark transition duration-medium group-hover:brightness-110 md:aspect-[3/2] md:h-auto md:min-h-[320px]"
+          label={project.title}
+          ratio="3:2"
+        />
+      )}
       <div className="flex flex-1 flex-col gap-5 p-6 md:p-7">
         <div className="flex items-start justify-end gap-4 font-mono text-[11px] uppercase tracking-[0.1em]">
           <StatusBadge confidential={project.confidential} status={project.status} />

@@ -21,6 +21,20 @@ export type ProjectSection = {
   body: LocalizedString[];
 };
 
+export type ProjectMedia = {
+  type: "image" | "video";
+  src: string;
+  alt: LocalizedString;
+  poster?: string;
+  caption?: LocalizedString;
+};
+
+export type ProjectResource = {
+  label: LocalizedString;
+  href: string;
+  type: "pdf" | "document" | "prototype" | "website";
+};
+
 export type DecisionItem = {
   title: LocalizedString;
   rationale: LocalizedString;
@@ -38,6 +52,12 @@ export type Project = {
   year?: string;
   dateRange?: string;
   externalUrl?: string;
+  coverImage?: string;
+  coverAlt?: LocalizedString;
+  gallery?: ProjectMedia[];
+  resources?: ProjectResource[];
+  award?: LocalizedString;
+  launchStatus?: LocalizedString;
   status: ContentStatus;
   tags: LocalizedString[];
   categories: LocalizedString[];

@@ -6,7 +6,7 @@ describe("project lookup", () => {
   it("finds a project by slug", () => {
     const project = getProjectBySlug("petsona");
 
-    expect(project ? getLocalizedText(project.title) : undefined).toBe("Petsona: Pet MBTI Social App");
+    expect(project ? getLocalizedText(project.title) : undefined).toBe("Petsona: A Social App for Your Pet's AI Persona");
   });
 
   it("links Petsona to its live site", () => {
@@ -31,10 +31,24 @@ describe("project lookup", () => {
   });
 
   it("cycles to the next project", () => {
-    expect(getNextProject("living-chronicles")?.slug).toBe("petsona");
+    expect(getNextProject("living-chronicles")?.slug).toBe("curious-conch");
   });
 
   it("only includes independent project detail slugs", () => {
-    expect(getProjectSlugs()).toEqual(["petsona", "curious-conch", "global-top-star", "living-chronicles"]);
+    expect(getProjectSlugs()).toEqual([
+      "tonight-wish-card",
+      "petsona",
+      "global-top-star",
+      "loom",
+      "living-chronicles",
+      "curious-conch"
+    ]);
+  });
+
+  it("keeps Curious Conch last and features the first three projects", async () => {
+    const { featuredProjects, projects } = await import("@/data/projects");
+
+    expect(projects.at(-1)?.slug).toBe("curious-conch");
+    expect(featuredProjects.map((project) => project.slug)).toEqual(["tonight-wish-card", "petsona", "global-top-star"]);
   });
 });

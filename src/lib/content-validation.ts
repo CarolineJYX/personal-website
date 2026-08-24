@@ -85,3 +85,9 @@ export function validateProjectSlugs(): boolean {
   const slugs = projects.map((project) => project.slug);
   return new Set(slugs).size === slugs.length && slugs.every((slug) => /^[a-z0-9-]+$/.test(slug));
 }
+
+export function findInvalidProjectMediaPaths(): string[] {
+  return projects.flatMap((project) => [project.coverImage, ...(project.gallery?.map((media) => media.src) ?? [])])
+    .filter((path): path is string => Boolean(path))
+    .filter((path) => !path.startsWith("/images/") && !path.startsWith("/media/"));
+}

@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { researchItems } from "@/data/education";
 import { experiences } from "@/data/experience";
-import { findForbiddenDisplayTerms, findForbiddenPrivateTerms, findIncompleteLocalizedStrings, validateProjectSlugs } from "./content-validation";
+import { findForbiddenDisplayTerms, findForbiddenPrivateTerms, findIncompleteLocalizedStrings, findInvalidProjectMediaPaths, validateProjectSlugs } from "./content-validation";
 
 describe("content validation", () => {
   it("does not expose forbidden placeholder terms", () => {
@@ -37,6 +37,10 @@ describe("content validation", () => {
 
   it("uses unique URL-safe project slugs", () => {
     expect(validateProjectSlugs()).toBe(true);
+  });
+
+  it("uses local, web-safe project media paths", () => {
+    expect(findInvalidProjectMediaPaths()).toEqual([]);
   });
 
   it("keeps Agentic video tracking as research with complete bilingual highlights", () => {
