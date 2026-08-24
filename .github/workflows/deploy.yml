@@ -66,4 +66,6 @@ jobs:
         run: |
           curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/ >/dev/null
           curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/projects >/dev/null
+          curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/projects/tonight-wish-card >/dev/null
+          curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/projects/loom >/dev/null
           curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/sitemap.xml >/dev/null
