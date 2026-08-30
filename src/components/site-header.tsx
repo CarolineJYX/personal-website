@@ -12,7 +12,8 @@ const navItems = [
   { label: { en: "Internship Experience", zh: "实习经历" }, href: "/experience" },
   { label: { en: "Projects", zh: "项目经历" }, href: "/projects" },
   { label: { en: "Education & Research", zh: "教育与研究" }, href: "/education" },
-  { label: { en: "Contact", zh: "联系" }, href: "/contact" }
+  { label: { en: "Contact", zh: "联系" }, href: "/contact" },
+  { label: { en: "Interactive", zh: "交互空间" }, href: "/interactive" }
 ];
 
 function isCurrentPath(pathname: string, href: string): boolean {
@@ -50,6 +51,10 @@ export function SiteHeader() {
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
+
+  if (pathname === "/interactive") {
+    return null;
+  }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line-dark/80 bg-stage-black/82 backdrop-blur-md">

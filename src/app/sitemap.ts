@@ -3,7 +3,7 @@ import { getProjectSlugs } from "@/lib/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  const routes = ["", "/experience", "/projects", "/education", "/contact"];
+  const routes = ["", "/experience", "/projects", "/education", "/contact", "/interactive"];
   const projectRoutes = getProjectSlugs().map((slug) => `/projects/${slug}`);
 
   return [...routes, ...projectRoutes].map((route) => ({
