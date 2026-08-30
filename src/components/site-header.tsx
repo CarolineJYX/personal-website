@@ -56,7 +56,7 @@ export function SiteHeader() {
   }, [pathname]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line-dark/80 bg-stage-black/82 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line-dark/80 bg-[rgba(10,9,8,0.92)] backdrop-blur-md">
       <div className="site-shell flex h-16 items-center justify-between md:h-20">
         <Link
           aria-label="Back to home"

@@ -37,7 +37,7 @@ export function HomeEducationResearchToggle() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div
         aria-label="Education and research summary"
         className="inline-flex min-h-11 overflow-hidden rounded-sm border border-line-light bg-line-light"
@@ -48,13 +48,13 @@ export function HomeEducationResearchToggle() {
       </div>
 
       {activeTab === "education" ? (
-        <article className="rounded border border-line-light bg-programme-white p-6 md:p-8">
+        <article className="rounded border border-line-light bg-programme-white p-5 md:p-6">
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-start">
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-gold">
                 <LocalizedText value={{ en: "Education", zh: "教育" }} />
               </p>
-              <h3 className="mt-3 font-display text-3xl font-semibold leading-tight text-ink md:text-4xl">
+              <h3 className="mt-3 font-display text-3xl font-semibold leading-tight text-ink">
                 <LocalizedText value={education.institution} />
               </h3>
               <p className="mt-2 text-lg font-semibold text-ink">
@@ -71,19 +71,19 @@ export function HomeEducationResearchToggle() {
             </div>
           </div>
           {education.notes[0] ? (
-            <p className="mt-6 max-w-3xl text-sm leading-6 text-ink/75">
+            <p className="mt-4 max-w-3xl text-sm leading-6 text-ink/75">
               <LocalizedText value={education.notes[0]} />
             </p>
           ) : null}
         </article>
       ) : (
-        <article className="rounded border border-line-light bg-programme-white p-6 md:p-8">
+        <article className="rounded border border-line-light bg-programme-white p-5 md:p-6">
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-start">
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-gold">
                 <LocalizedText value={{ en: "Research", zh: "研究" }} />
               </p>
-              <h3 className="mt-3 font-display text-3xl font-semibold leading-tight text-ink md:text-4xl">
+              <h3 className="mt-3 font-display text-3xl font-semibold leading-tight text-ink">
                 <LocalizedText value={research.title} />
               </h3>
               <p className="mt-2 text-sm text-ink/60">
@@ -95,7 +95,7 @@ export function HomeEducationResearchToggle() {
               <p className="mt-1 font-semibold uppercase text-wine">{research.status}</p>
             </div>
           </div>
-          <p className="mt-6 max-w-3xl text-sm leading-6 text-ink/75">
+          <p className="mt-4 max-w-3xl text-sm leading-6 text-ink/75">
             <LocalizedText value={research.description} />
           </p>
         </article>

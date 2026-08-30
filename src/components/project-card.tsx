@@ -10,9 +10,10 @@ import { StatusBadge } from "./status-badge";
 type ProjectCardProps = {
   project: Project;
   size?: "large" | "regular";
+  compact?: boolean;
 };
 
-export function ProjectCard({ project, size = "regular" }: ProjectCardProps) {
+export function ProjectCard({ project, size = "regular", compact = false }: ProjectCardProps) {
   const wide = size === "large";
 
   return (
@@ -24,7 +25,12 @@ export function ProjectCard({ project, size = "regular" }: ProjectCardProps) {
       href={getProjectCaseHref(project)}
     >
       {project.coverImage ? (
-        <div className="relative aspect-[3/2] min-h-[250px] overflow-hidden border-b border-line-dark md:min-h-[320px]">
+        <div
+          className={cn(
+            "relative overflow-hidden border-b border-line-dark",
+            compact ? "aspect-[16/10]" : "aspect-[3/2] min-h-[250px] md:min-h-[320px]"
+          )}
+        >
           <Image
             alt={project.coverAlt?.en ?? project.title.en}
             className="object-cover transition duration-medium group-hover:scale-[1.02] group-hover:brightness-110"
@@ -35,17 +41,20 @@ export function ProjectCard({ project, size = "regular" }: ProjectCardProps) {
         </div>
       ) : (
         <MediaPlaceholder
-          className="aspect-auto h-[250px] rounded-none border-0 border-b border-line-dark transition duration-medium group-hover:brightness-110 md:aspect-[3/2] md:h-auto md:min-h-[320px]"
+          className={cn(
+            "rounded-none border-0 border-b border-line-dark transition duration-medium group-hover:brightness-110",
+            compact ? "aspect-[16/10]" : "aspect-auto h-[250px] md:aspect-[3/2] md:h-auto md:min-h-[320px]"
+          )}
           label={project.title}
-          ratio="3:2"
+          ratio={compact ? "16:10" : "3:2"}
         />
       )}
-      <div className="flex flex-1 flex-col gap-5 p-6 md:p-7">
+      <div className={cn("flex flex-1 flex-col", compact ? "gap-4 p-5 md:p-6" : "gap-5 p-6 md:p-7")}>
         <div className="flex items-start justify-end gap-4 font-mono text-[11px] uppercase tracking-[0.1em]">
           <StatusBadge confidential={project.confidential} status={project.status} />
         </div>
         <div className="space-y-2">
-          <h3 className="font-display text-3xl font-medium leading-tight text-text-primary">
+          <h3 className={cn("font-display font-medium leading-tight text-text-primary", compact ? "text-2xl" : "text-3xl")}>
             <LocalizedText value={project.title} />
           </h3>
           <p className="text-sm leading-6 text-text-secondary">

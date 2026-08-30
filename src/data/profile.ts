@@ -24,6 +24,36 @@ export const profile = {
     en: "From pre-training data and post-training/SFT to benchmarks, evaluation loops, and agent design, I connect model development with real product outcomes across software, mobile, and smart hardware.",
     zh: "从 Pre-training 数据准备、Post-training/SFT 到 Benchmark、模型评测闭环与 Agent 设计，我持续连接模型研发与软件、移动端及智能硬件中的真实产品结果。"
   },
+  homeStrengths: [
+    {
+      title: l("Model Data & Training", "模型数据与训练"),
+      description: l(
+        "Deep-learning and LLM fundamentals, model-team experience, and data preparation from pre-training through business-side post-training/SFT.",
+        "理解深度学习与大模型原理，具备模型团队经验，熟悉从 Pre-training 到业务侧 Post-training/SFT 的数据准备。"
+      )
+    },
+    {
+      title: l("Benchmarks & Evaluation", "Benchmark 与模型评测"),
+      description: l(
+        "Benchmark-system design and the core feedback loop that turns model evaluation into actionable iteration.",
+        "擅长 Benchmark 体系建立与模型评测核心闭环，让评测结果能够持续指导模型迭代。"
+      )
+    },
+    {
+      title: l("Context, Harness & Agents", "Context、Harness 与 Agent"),
+      description: l(
+        "Context and Harness Engineering for designing and tuning agents around real business scenarios.",
+        "熟悉 Context / Harness Engineering，能够面向真实业务场景完成 Agent 设计与调优。"
+      )
+    },
+    {
+      title: l("Product Delivery", "产品落地与协同"),
+      description: l(
+        "Product experience across software, mobile, and smart hardware, aligning algorithm, engineering, and business teams to deliver value.",
+        "具备软件、移动端及智能硬件产品经验，擅长协同算法、研发与业务团队，将模型能力转化为产品价值。"
+      )
+    }
+  ],
   focusAreas: [
     { en: "Agent Design & Tuning", zh: "Agent 设计与调优" },
     { en: "Benchmarks & Evaluation", zh: "Benchmark 与模型评测" },

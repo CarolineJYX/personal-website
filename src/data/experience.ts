@@ -266,3 +266,7 @@ export const experiences: Experience[] = [
     tags: [l("Databases and Data Analysis", "Databases and Data Analysis")]
   }
 ];
+
+const homepageExperienceIds = ["bytedance-seed-aigc", "tiktok-ai-advertising"];
+
+export const homepageExperiences = experiences.filter((experience) => homepageExperienceIds.includes(experience.id));

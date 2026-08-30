@@ -9,7 +9,7 @@ import { ProjectCard } from "@/components/project-card";
 import { ResumeButton } from "@/components/resume-button";
 import { Reveal } from "@/components/reveal";
 import { SectionHeader } from "@/components/section-header";
-import { experiences } from "@/data/experience";
+import { homepageExperiences } from "@/data/experience";
 import { profile } from "@/data/profile";
 import { featuredProjects } from "@/data/projects";
 
@@ -21,26 +21,35 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <main id="main-content">
-      <section className="stage-glow bg-stage-black pb-20 pt-32 text-text-primary md:pb-28 md:pt-40">
-        <div className="site-shell grid min-h-[72svh] items-center gap-12 lg:grid-cols-[minmax(0,1fr)_420px] xl:grid-cols-[minmax(0,1fr)_460px]">
-          <Reveal className="flex max-w-4xl flex-col items-start gap-8">
+      <section className="stage-glow bg-stage-black pt-16 text-text-primary md:pt-20">
+        <div className="site-shell grid items-center gap-10 py-10 md:py-12 lg:grid-cols-[minmax(0,3fr)_minmax(320px,2fr)] lg:gap-14 xl:gap-16">
+          <Reveal className="flex max-w-4xl flex-col items-start gap-6">
             <div>
-              <h1 className="text-balance font-display text-[52px] font-medium leading-[0.98] text-text-primary md:text-[80px]">
+              <h1 className="text-balance font-display text-[48px] font-medium leading-[0.98] text-text-primary md:text-[68px] xl:text-[76px]">
                 <LocalizedText uppercase value={profile.name} />
               </h1>
-              <p className="mt-3 font-display text-3xl text-text-secondary">
+              <p className="mt-2 font-display text-2xl text-text-secondary md:text-3xl">
                 <LocalizedText value={profile.role} />
               </p>
             </div>
-            <div className="max-w-2xl space-y-4">
-              <p className="text-xl leading-8 text-text-primary">
+            <div className="max-w-3xl space-y-3">
+              <p className="text-lg font-medium leading-7 text-text-primary md:text-xl md:leading-8">
                 <LocalizedText value={profile.statement} />
               </p>
-              <p className="text-base leading-7 text-text-secondary">
-                <LocalizedText value={profile.extendedStatement} />
-              </p>
             </div>
-            <div className="flex flex-col gap-4 sm:flex-row">
+            <div className="grid w-full max-w-3xl gap-x-6 gap-y-5 sm:grid-cols-2">
+              {profile.homeStrengths.map((strength) => (
+                <article className="border-l border-line-dark pl-4" key={strength.title.en}>
+                  <h2 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-gold">
+                    <LocalizedText value={strength.title} />
+                  </h2>
+                  <p className="mt-2 text-sm leading-6 text-text-secondary">
+                    <LocalizedText value={strength.description} />
+                  </p>
+                </article>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-3">
               <ButtonLink external href={profile.linkedin}>
                 LinkedIn
               </ButtonLink>
@@ -50,14 +59,14 @@ export default function HomePage() {
               <ResumeButton />
             </div>
           </Reveal>
-          <Reveal className="w-full max-w-[360px] justify-self-center sm:max-w-[400px] lg:max-w-none lg:justify-self-end">
-            <div className="relative aspect-[3/4] overflow-hidden rounded border border-line-dark bg-stage-surface">
+          <Reveal className="w-full max-w-[350px] justify-self-center sm:max-w-[380px] lg:max-w-[400px] lg:justify-self-end">
+            <div className="relative aspect-[4/3] overflow-hidden rounded border border-line-dark bg-stage-surface sm:aspect-[4/5]">
               <Image
                 alt="Caroline Xia portrait / 夏静远头像"
                 className="object-cover object-[50%_18%]"
                 fill
                 priority
-                sizes="(min-width: 1280px) 460px, (min-width: 1024px) 420px, min(90vw, 400px)"
+                sizes="(min-width: 1024px) 40vw, min(90vw, 380px)"
                 src="/images/profile-caroline-xia.jpg"
               />
             </div>
@@ -65,8 +74,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-programme-ivory py-16 text-ink md:py-28">
-        <div className="site-shell space-y-12">
+      <section className="bg-programme-ivory py-14 text-ink md:py-20">
+        <div className="site-shell space-y-10">
           <Reveal>
             <SectionHeader
               eyebrow={{ en: "Experience", zh: "经历" }}
@@ -75,7 +84,7 @@ export default function HomePage() {
             />
           </Reveal>
           <Reveal>
-            <ExperienceTimeline compact items={experiences} />
+            <ExperienceTimeline items={homepageExperiences} />
           </Reveal>
           <div className="flex justify-center">
             <ButtonLink className="text-ink" href="/experience" variant="text">
@@ -85,18 +94,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-stage-black py-16 text-text-primary md:py-24">
-        <div className="site-shell space-y-12">
+      <section className="bg-stage-black py-14 text-text-primary md:py-20">
+        <div className="site-shell space-y-10">
           <Reveal>
             <SectionHeader
               eyebrow={{ en: "Projects", zh: "项目" }}
               title={{ en: "Selected Work", zh: "精选项目" }}
             />
           </Reveal>
-          <div className="grid gap-6 md:grid-cols-12">
-            {featuredProjects.map((project, index) => (
-              <Reveal className={index === 0 ? "min-w-0 md:col-span-7" : index === 1 ? "min-w-0 md:col-span-5" : "min-w-0 md:col-span-12"} key={project.slug}>
-                <ProjectCard project={project} size={index === 1 ? "regular" : "large"} />
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {featuredProjects.map((project) => (
+              <Reveal className="min-w-0" key={project.slug}>
+                <ProjectCard compact project={project} />
               </Reveal>
             ))}
           </div>
@@ -108,8 +117,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-programme-ivory py-16 text-ink md:py-28">
-        <div className="site-shell space-y-12">
+      <section className="bg-programme-ivory py-14 text-ink md:py-20">
+        <div className="site-shell space-y-10">
           <Reveal>
             <SectionHeader
               eyebrow={{ en: "Education", zh: "教育" }}
@@ -123,9 +132,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-stage-black py-20 text-text-primary md:py-32">
-        <div className="site-shell flex flex-col items-center gap-8 text-center">
-          <h2 className="text-balance font-display text-4xl font-medium leading-tight md:text-6xl">
+      <section className="bg-stage-black py-16 text-text-primary md:py-24">
+        <div className="site-shell flex flex-col items-center gap-6 text-center">
+          <h2 className="text-balance font-display text-4xl font-medium leading-tight md:text-5xl">
             <LocalizedText
               value={{
                 en: "The next intelligent experience starts with one conversation.",
