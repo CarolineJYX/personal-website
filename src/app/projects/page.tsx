@@ -31,7 +31,7 @@ export default function ProjectsPage() {
 
         <div className="grid gap-6 md:grid-cols-12">
           {projects.map((project, index) => (
-            <Reveal className={index % 3 === 1 ? "md:col-span-5" : "md:col-span-7"} key={project.slug}>
+            <Reveal className={index % 3 === 1 ? "min-w-0 md:col-span-5" : "min-w-0 md:col-span-7"} key={project.slug}>
               <ProjectArchiveCard index={index} project={project} />
             </Reveal>
           ))}

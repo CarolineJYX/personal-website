@@ -17,23 +17,23 @@ export const profile = {
     zh: "AI产品经理"
   },
   statement: {
-    en: "Turning model capability into measurable, shippable, and scalable AI products.",
-    zh: "让模型能力成为可评测、可上线、可增长的产品体验。"
+    en: "Turning model capabilities into measurable, shippable, and scalable AI products.",
+    zh: "推动模型能力转化为可评测、可上线、可增长的产品价值。"
   },
   extendedStatement: {
-    en: "Bridging foundational model potential and production-ready product systems across agents, evaluation, multimodal AI, and human-centered workflows.",
-    zh: "连接基础模型潜力与真实产品结果，覆盖智能体系统、模型评测、多模态 AI 与以人为中心的产品流程。"
+    en: "From pre-training data and post-training/SFT to benchmarks, evaluation loops, and agent design, I connect model development with real product outcomes across software, mobile, and smart hardware.",
+    zh: "从 Pre-training 数据准备、Post-training/SFT 到 Benchmark、模型评测闭环与 Agent 设计，我持续连接模型研发与软件、移动端及智能硬件中的真实产品结果。"
   },
   focusAreas: [
-    { en: "Agent Systems", zh: "智能体系统" },
-    { en: "Model Evaluation", zh: "模型评测" },
-    { en: "Context Engineering", zh: "上下文工程" },
+    { en: "Agent Design & Tuning", zh: "Agent 设计与调优" },
+    { en: "Benchmarks & Evaluation", zh: "Benchmark 与模型评测" },
+    { en: "Context / Harness Engineering", zh: "Context / Harness Engineering" },
     { en: "Multimodal AI", zh: "多模态 AI" }
   ],
   strengths: [
     l(
-      "Master the principles of deep learning and large models, with experience working in model teams and business implementation, familiar with the core processes from Pre-training data preparation to Post-training/SFT and model evaluation. Have Agent system design experience based on LangGraph, familiar with Context Engineering (Prompt, RAG, memory construction), and able to complete business-scenario Agent design and model tuning. Have software, mobile-end and smart hardware product experience, good at cross-algorithm, R&D and business collaboration, and promoting model capabilities into product value.",
-      "掌握深度学习与大模型原理，具备模型团队工作经历与业务落地经验，熟悉从Pre-training数据准备到Post-training/SFT、模型评测的核心流程。具备基于LangGraph的Agent系统设计经验，熟悉Context Engineering（Prompt、RAG、记忆构建），能完成业务场景Agent设计及模型调优。具备软件、移动端及智能硬件产品经验，擅长跨算法、研发与业务协同，推动模型能力向产品价值转化。"
+      "I understand the principles behind deep learning and large language models, with hands-on experience in model teams and production delivery. I am familiar with data preparation from pre-training through business-side post-training/SFT, and I specialize in building benchmark systems and closing the model-evaluation loop. I work with Context and Harness Engineering to design and tune agents for real business scenarios. With product experience across software, mobile, and smart hardware, I align algorithm, engineering, and business teams to turn model capabilities into product value.",
+      "了解深度学习与大模型原理，具备模型团队工作经历与业务落地经验；熟悉从模型 Pre-training 到业务侧 Post-training/SFT 的数据准备，擅长 Benchmark 体系建立以及模型评测的核心闭环。熟悉 Context / Harness Engineering，能完成业务场景 Agent 设计以及调优。具备软件、移动端及智能硬件产品经验，擅长跨算法、研发与业务协同，推动模型能力向产品价值转化。"
     )
   ],
   locationLine: {

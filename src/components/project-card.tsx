@@ -18,7 +18,7 @@ export function ProjectCard({ project, size = "regular" }: ProjectCardProps) {
   return (
     <LocaleLink
       className={cn(
-        "group flex h-full flex-col overflow-hidden rounded border border-line-dark bg-stage-elevated transition duration-medium ease-enter hover:border-muted-gold",
+        "group flex h-full min-w-0 flex-col overflow-hidden rounded border border-line-dark bg-stage-elevated transition duration-medium ease-enter hover:border-muted-gold",
         wide ? "md:col-span-7" : "md:col-span-5"
       )}
       href={getProjectCaseHref(project)}

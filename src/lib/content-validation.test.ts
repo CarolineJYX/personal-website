@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { researchItems } from "@/data/education";
+import { educationItems, researchItems } from "@/data/education";
 import { experiences } from "@/data/experience";
+import { projects } from "@/data/projects";
 import { findForbiddenDisplayTerms, findForbiddenPrivateTerms, findIncompleteLocalizedStrings, findInvalidProjectMediaPaths, validateProjectSlugs } from "./content-validation";
 
 describe("content validation", () => {
@@ -59,5 +60,38 @@ describe("content validation", () => {
     expect(experiences.find((experience) => experience.id === "shanghai-zhipu-film-business-operations")?.duration).toBe("2 mos");
     expect(experiences.find((experience) => experience.id === "agricultural-bank-business-operations")?.duration).toBe("2 mos");
     expect(experiences.find((experience) => experience.id === "pharmadeer-data-analyst")?.duration).toBe("1 mo");
+  });
+
+  it("publishes the latest bilingual Seed and TikTok timeline", () => {
+    const seed = experiences.find((experience) => experience.id === "bytedance-seed-aigc");
+    const advertising = experiences.find((experience) => experience.id === "tiktok-ai-advertising");
+    const aigc = experiences.find((experience) => experience.id === "tiktok-aigc-model");
+
+    expect(experiences.slice(0, 3).map((experience) => experience.id)).toEqual([
+      "bytedance-seed-aigc",
+      "tiktok-ai-advertising",
+      "tiktok-aigc-model"
+    ]);
+    expect(seed?.period).toBe("2026.08-Present");
+    expect(seed?.highlights?.[0].zh).toContain("保密协议");
+    expect(seed?.highlights?.[0].en).toContain("confidentiality agreement");
+    expect(advertising?.period).toBe("2026.06-2026.08");
+    expect(advertising?.highlights).toHaveLength(5);
+    expect(aigc?.highlights).toHaveLength(5);
+  });
+
+  it("keeps the latest education and research ordering", () => {
+    expect(educationItems.map((item) => item.id)).toEqual(["nus-master", "leeds-exchange", "sta-bachelor"]);
+    expect(educationItems.find((item) => item.id === "sta-bachelor")?.rank).toBe("1/40");
+    expect(researchItems.find((item) => item.id === "agentic-video-tracking")?.period).toBe("2025.04-2025.09");
+    expect(researchItems.find((item) => item.id === "faust-violence-nlp")?.period).toBe("2023.09-2024.04");
+  });
+
+  it("uses the latest project title and date ranges without adding a seventh case", () => {
+    expect(projects).toHaveLength(6);
+    expect(projects.find((project) => project.slug === "petsona")?.dateRange).toBe("2026.02-2026.06");
+    expect(projects.find((project) => project.slug === "global-top-star")?.title.zh).toContain("你一定要成为全球顶流");
+    expect(projects.find((project) => project.slug === "global-top-star")?.dateRange).toBe("2026.06-2026.07");
+    expect(projects.find((project) => project.slug === "curious-conch")?.dateRange).toBe("2026.02-2026.05");
   });
 });

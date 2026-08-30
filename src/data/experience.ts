@@ -5,37 +5,58 @@ const l = (en: string, zh: string): LocalizedString => ({ en, zh });
 
 export const experiences: Experience[] = [
   {
-    id: "tiktok-ai-advertising",
+    id: "bytedance-seed-aigc",
     season: "01",
     year: "2026",
-    company: l("ByteDance (Tiktok)", "字节跳动 (Tiktok)"),
-    division: "Global Monetization Product and Technology",
-    role: l("AI Advertising Product Manager", "AI广告产品经理"),
-    period: "2026.06-Present",
+    company: l("ByteDance (Seed)", "字节跳动 (Seed)"),
+    division: "Seed",
+    role: l("AIGC Model Product Manager", "AIGC模型产品经理"),
+    period: "2026.08-Present",
     location: l("Beijing", "北京"),
     description: l(
-      "Promoted the construction and scaling of lead-ad DM bot, led Bot model tuning, and cooperated with GTM strategy to raise Agent penetration rate from 1% to 9.7%.",
-      "推动线索广告DM bot建设与放量，主导Bot模型调优，配合GTM策略将Agent渗透率从1%拉升至9.7%（东南亚核心市场达11.77%）。"
+      "Contributing to Seedance capability development through caption-data strategy optimization and an automated workflow from implementation to launch, within the boundaries of the applicable confidentiality agreement.",
+      "推进 Seedance 相关能力建设，包括 Caption 数据策略优化、自动化工作流搭建与上线闭环；因受保密协议约束，具体细节不作展开。"
     ),
     highlights: [
       l(
-        "○ Core achievement: Promoted the construction and scaling of lead-ad DM bot, led Bot model tuning, and cooperated with GTM strategy to raise Agent penetration rate from 1% to 9.7% (reaching 11.77% in core Southeast Asian markets).",
-        "○核心成果：推动线索广告DM bot建设与放量，主导Bot模型调优，配合GTM策略将Agent渗透率从1%拉升至9.7%（东南亚核心市场达11.77%）。"
+        "○ Seedance capability development: Advancing caption-data strategy optimization and building an automated workflow through implementation and launch. Further details are omitted under the applicable confidentiality agreement.",
+        "○Seedance相关能力建设：推进Caption数据策略优化、自动化工作流搭建与上线闭环（因受保密协议约束，具体细节不作展开）。"
+      )
+    ],
+    tags: [l("AIGC", "AIGC"), l("Seedance", "Seedance"), l("Data Strategy", "数据策略")]
+  },
+  {
+    id: "tiktok-ai-advertising",
+    season: "02",
+    year: "2026",
+    company: l("ByteDance (TikTok)", "字节跳动 (TikTok)"),
+    division: "Global Monetization Product and Technology",
+    role: l("AI Advertising Product Manager", "AI广告产品经理"),
+    period: "2026.06-2026.08",
+    location: l("Beijing", "北京"),
+    description: l(
+      "Improved the EQ, evaluation system, agent memory, safety interception, and user journey of a lead-generation DM model, contributing to a statistically significant +4.54% lift in CVR2.",
+      "围绕线索广告 DM 模型推进 EQ、评测体系、Agent 记忆、安全拦截与用户旅程优化，带动 CVR2 +4.54% 置信正向。"
+    ),
+    highlights: [
+      l(
+        "○ DM model EQ launch: Contributed to SFT for Qwen3.5-397B, raising its EQ score from 50.07 to 64.37. Combined with lead-capture frequency optimization, the launch delivered a statistically significant +4.54% lift in CVR2.",
+        "○DM模型EQ优化上线：参与Qwen3.5-397B的SFT微调，EQ评分由50.07提升至64.37，叠加留资频次优化，带动CVR2 +4.54%置信正向。"
       ),
       l(
-        "○ Model EQ tuning: Aligned with the demands of top advertisers, built Golden Data and Benchmark from 0 to 1 (covering empathy, strategy, and realism dimensions), drove Qwen 3.5 (397B) to complete LoRA fine-tuning, raising EQ score significantly from 50.07 to 64.37. Together with optimizing the lead-retention frequency strategy, directly drove core conversion rate (CVR2) to achieve +4.54% statistically confident positive growth.",
-        "○模型EQ调优：对齐头部广告主诉求，从0到1搭建Golden Data与 Benchmark（涵盖共情、策略、拟真性维度），驱动 Qwen 3.5 (397B)完成LoRA微调，使EQ评分从50.07大幅跃升至64.37，配合优化留资频次策略，直接带动核心转化率（CVR2）取得+4.54%的置信正向增长。"
+        "○ DM model v2.0 iteration: At the foundation-model layer, identified Qwen3.5-397B's high cost, lack of audio/video capabilities, and latency constraints; helped restart the foundation-model and workflow discussion and define evaluation dimensions covering DM capability, cost, latency, multilingual support, and multimodality. At the evaluation layer, diagnosed overlapping v1.0 EQ rubrics and an LLM judge that was not aligned with human review; contributed to rebuilding Golden Data and the rubric system from scratch, stratifying SFT training data and benchmark distributions by user intent × vertical, and introducing an iterative human-model alignment workflow. The first Golden Data version has been completed.",
+        "○DM模型v2.0迭代拆解：①基模层面识别Qwen3.5-397B的高成本/无音视频能力/时延问题，推动重新启动基模+工作流讨论，梳理评估维度（DM能力/成本/时延/多语种/多模态）；②评估层面诊断v1.0 EQ Rubrics重合+LLM-Judge未人工对齐的问题，参与从0到1重构Golden Data与Rubrics体系，按用户意图×垂类分层设计SFT训练数据与Benchmark分布，引入人机多轮迭代对齐流程，已产出GoldenData初版。"
       ),
       l(
-        "○ Agent flow optimization: In response to merchants’ personalized needs for Bot reply style, led the launch of dynamic knowledge base and memory mechanism. At T+1 level, summarized advertisers’ business knowledge base and conversation style preferences based on advertiser service webpages and real conversation data. Effectively solved the stateless pain point of large models and significantly improved cross-session coherence and personalized service experience.",
-        "○Agent链路优化：针对商家对Bot回复风格的个性化需求，主导上线动态知识库与memory机制，T+1级别基于广告主服务网页与真实对话数据总结其业务知识库与话术偏好。有效解决大模型无状态（Stateless）的痛点，显著提升跨会话的连贯性与个性化服务体验。"
+        "○ Agent flow optimization: Contributed to launching a dynamic knowledge base and memory mechanism for merchants' personalized bot-reply styles. The system summarizes business knowledge and messaging preferences on a T+1 basis from advertiser webpages and real conversations, addressing the stateless nature of LLMs. Led SBS human evaluation, which showed materially stronger cross-session coherence and personalization than the baseline, and advanced the solution into an A/B test.",
+        "○Agent链路优化：针对商家对Bot回复风格的个性化需求，参与上线动态知识库+Memory机制，基于广告主网页与真实对话数据做T+1业务知识与话术偏好总结，解决大模型无状态（Stateless）痛点；主导SBS人工评估验证跨会话连贯性与个性化体验显著优于基线，并上线A/B实验。"
       ),
       l(
-        "○ Machine evaluation interception flow: Established a new S0/S1/S2 graded evaluation framework, launched S0/S1 automated machine evaluation, and under the condition that basic safety fully met standards, reduced latency from 16s to 5s.",
-        "○机器评估拦截链路：建立全新S0/S1/S2分级评估框架，上线S0/S1自动化机器评估，基础安全性全面达标的情况下，压缩时延从16s到5s。"
+        "○ Machine-evaluation interception: Contributed to an S0-S3 bad-case severity framework and rolled out full machine evaluation for S0/S1 cases, reducing latency from 16 seconds to 5 seconds while meeting safety requirements.",
+        "○机器评估拦截链路：参与制定Badcase判定S0-S3分级框架，推全S0/S1全量机器评估，安全性达标的情况下，压缩时延从16s到5s。"
       ),
       l(
-        "○ User journey optimization: Identified the pain point of lead loss during non-working hours, launched night-shift mode supporting custom time, enabling nighttime high-potential lead takeover and recalling lost customers.",
+        "○ User journey optimization: Identified lead loss outside business hours and launched a configurable night-shift mode to take over high-potential nighttime leads and recover otherwise lost customers.",
         "○用户旅程优化：定位非工作时段线索流失痛点，上线支持自定义时间的夜班模式，实现夜间高潜线索接管，召回流失客户。"
       )
     ],
@@ -43,9 +64,9 @@ export const experiences: Experience[] = [
   },
   {
     id: "tiktok-aigc-model",
-    season: "02",
+    season: "03",
     year: "2026",
-    company: l("ByteDance (Tiktok)", "字节跳动 (Tiktok)"),
+    company: l("ByteDance (TikTok)", "字节跳动 (TikTok)"),
     division: "Global Monetization Product and Technology",
     role: l("AIGC Model Product Manager", "AIGC模型产品经理"),
     period: "2026.04-2026.06",
@@ -64,12 +85,12 @@ export const experiences: Experience[] = [
         "○短剧工作流评测：统筹AI短剧工作流的效果评估闭环，设计并开展Clip与Episode双重粒度的SBS评测，持续指导Agent工作流的调优。"
       ),
       l(
-        "○ Video editing model evaluation: Promoted SBS evaluation of Bernini. For source video + Prompt video repainting tasks, established an evaluation set of nearly 1300 items, deeply benchmarked Kling V3 Omni, Wan 2.7, Grok Imagine and other SOTA models, calculated human preference Win Rate through blind-test labeling, and provided quantitative basis for model capability.",
-        "○视频编辑模型评测：推动Bernini的SBS评估。针对源视频+Prompt视频重绘任务，建立近1300条评测集，深度对齐Kling V3 Omni、Wan 2.7、Grok Imagine等SOTA模型，通过盲测打标计算人工偏好胜率（Win Rate），为模型能力提供量化依据。"
+        "○ Digital-human model data preparation: Contributed deeply to the business definition of a 1.6B talking-head model. Built a live-stream micro-action dataset from scratch, systematically defining proprietary head, micro-expression, and hand-action standards together with prompt-mapping logic; called Seedance 2.0 and Kling v3 at scale to batch-generate training videos.",
+        "○数字人模型数据准备：深入参与1.6B数字人口播模型的业务定义。从0到1搭建直播微动作数据集，体系化定义头部、微表情、手部专有动作规范及Prompt映射逻辑；规模化调用Seedance 2.0/ Kling v3等模型批量生成训练视频。"
       ),
       l(
-        "○ Digital human micro-action synthetic data: Deeply participated in the business definition of the 1.6B digital human talking-head model. Built a live-stream micro-action dataset from 0 to 1, systematically defined proprietary action specifications such as head and body movements and Prompt mapping logic; called Seedance 2.0 at scale to batch-generate training videos, opening up a high-quality data supply chain for the realism of self-developed digital human actions.",
-        "○数字人微动作合成数据：深入参与1.6B数字人口播模型的业务定义。从0到1搭建直播微动作数据集，体系化定义头部、肢体等专有动作规范及Prompt映射逻辑；规模化调用Seedance 2.0批量生成训练视频，为自研数字人动作的拟真度打通高质量数据供应链。"
+        "○ Bernini video-editing model evaluation: Advanced SBS evaluation for source-video + prompt video-redrawing tasks. Built an evaluation set of nearly 1,300 cases, benchmarked Bernini closely against Kling V3 Omni, Wan 2.7, Grok Imagine, and other models, calculated human-preference win rates through blind labeling, provided a quantitative view of model capability, and selected showcase examples.",
+        "○Bernini视频编辑模型评测：推动Bernini的SBS评估。针对源视频+Prompt视频重绘任务，建立近1300条评测集，深度对齐Kling V3 Omni、Wan 2.7、Grok Imagine等模型，通过盲测打标计算人工偏好胜率（Win Rate），为模型能力提供量化依据，并遴选Showcase。"
       ),
       l(
         "○ Short drama market Agent: For overseas markets, transformed multi-source unstructured data into standardized short drama genre clustering weekly reports, and accumulated visual recognition, weight calculation, genre labeling and quality review mechanisms.",
@@ -80,7 +101,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "xiaomi-ai-hardware",
-    season: "03",
+    season: "04",
     year: "2025",
     company: l("Xiaomi Technology Co., Ltd.", "小米科技有限责任公司"),
     division: l("Group Technical Committee", "集团技术委员会"),
@@ -121,7 +142,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "xiaomi-automotive-data",
-    season: "04",
+    season: "05",
     year: "2025",
     company: l("Xiaomi Technology Co., Ltd.", "小米科技有限责任公司"),
     division: l("Automotive Department", "汽车部"),
@@ -158,7 +179,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "fsg-ai-product",
-    season: "05",
+    season: "06",
     year: "2023",
     company: l("Shanghai FSG Software Co., Ltd.", "上海复深蓝软件股份有限公司"),
     division: l("Strategic R&D Department", "战略研发部"),
@@ -187,7 +208,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "shanghai-zhipu-film-business-operations",
-    season: "06",
+    season: "07",
     year: "2022",
     company: "Shanghai Zhipu Film",
     division: l("Internship", "实习"),
@@ -218,7 +239,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "agricultural-bank-business-operations",
-    season: "07",
+    season: "08",
     year: "2022",
     company: l("Agricultural Bank of China", "中国农业银行"),
     division: l("Internship", "实习"),
@@ -232,7 +253,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "pharmadeer-data-analyst",
-    season: "08",
+    season: "09",
     year: "2021",
     company: "PharmaDeer",
     division: l("Part-time", "兼职"),

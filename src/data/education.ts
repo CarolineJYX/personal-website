@@ -29,30 +29,6 @@ export const educationItems: EducationItem[] = [
     tags: [l("Computing", "计算机"), l("AI Systems", "AI 系统"), l("Agent", "智能体"), l("Multimodal", "多模态")]
   },
   {
-    id: "sta-bachelor",
-    year: "2020",
-    institution: l("Shanghai Theatre Academy", "上海戏剧学院"),
-    programme: l("Bachelor of Arts", "艺术学学士"),
-    field: l("Dramatic Literature", "戏剧影视文学"),
-    period: "2020.10-2024.06",
-    result: l("GPA: 4.25/5.0 (Ranked first in major, Shanghai Outstanding Graduate)", "GPA：4.25/5.0 （专业第一名，上海市优秀毕业生）"),
-    rank: "专业第一名",
-    status: "completed",
-    notes: [
-      l(
-        "Main courses: Game Planning and Development (Unity&Python), Art and Artificial Intelligence, Film Screenwriting.",
-        "2020.10-2024.06 主修课程：游戏策划与开发 (Unity&Python)、艺术与人工智能、电影编剧。"
-      )
-    ],
-    coursework: [
-      l("Game Planning and Development (Unity&Python)", "游戏策划与开发 (Unity&Python)"),
-      l("Art and Artificial Intelligence", "艺术与人工智能"),
-      l("Film Screenwriting", "电影编剧")
-    ],
-    credentialNote: l("Ranked first in major · Shanghai Outstanding Graduate", "专业第一名，上海市优秀毕业生"),
-    tags: [l("Dramatic Literature", "戏剧影视文学"), l("Narrative", "叙事"), l("AI & Art", "艺术与人工智能")]
-  },
-  {
     id: "leeds-exchange",
     year: "2023",
     institution: l("University of Leeds, UK (QS77)", "英国利兹大学（QS77）"),
@@ -77,6 +53,30 @@ export const educationItems: EducationItem[] = [
     credentialNote: l("QS77 · First-class degree", "QS77 · 一等学位"),
     tags: [l("Exchange", "交换"), l("Computer Science", "计算机"), l("Technology", "技术")],
     exchange: true
+  },
+  {
+    id: "sta-bachelor",
+    year: "2020",
+    institution: l("Shanghai Theatre Academy", "上海戏剧学院"),
+    programme: l("Bachelor of Arts", "艺术学学士"),
+    field: l("Dramatic Literature", "戏剧影视文学"),
+    period: "2020.10-2024.06",
+    result: l("GPA: 4.25/5.0 (1/40, Shanghai Outstanding Graduate)", "GPA：4.25/5.0（1/40，上海市优秀毕业生）"),
+    rank: "1/40",
+    status: "completed",
+    notes: [
+      l(
+        "Main courses: Game Planning and Development (Unity&Python), Art and Artificial Intelligence, Film Screenwriting.",
+        "2020.10-2024.06 主修课程：游戏策划与开发 (Unity&Python)、艺术与人工智能、电影编剧。"
+      )
+    ],
+    coursework: [
+      l("Game Planning and Development (Unity&Python)", "游戏策划与开发 (Unity&Python)"),
+      l("Art and Artificial Intelligence", "艺术与人工智能"),
+      l("Film Screenwriting", "电影编剧")
+    ],
+    credentialNote: l("1/40 · Shanghai Outstanding Graduate", "1/40 · 上海市优秀毕业生"),
+    tags: [l("Dramatic Literature", "戏剧影视文学"), l("Narrative", "叙事"), l("AI & Art", "艺术与人工智能")]
   }
 ];
 
@@ -85,7 +85,7 @@ export const researchItems: ResearchItem[] = [
     id: "agentic-video-tracking",
     title: l("Agentic AI for Object Tracking in Videos", "Agentic AI for Object Tracking in Videos"),
     type: l("Multimodal Agent System and Computer Vision｜Graduation Thesis", "多模态Agent系统与计算机视觉｜毕业论文"),
-    period: "2025.04-2025.9",
+    period: "2025.04-2025.09",
     status: "completed",
     description: l(
       "Build an intelligent-agent closed loop based on React-Loop, reconstruct video object tracking into an Agentic AI process that is “plannable, verifiable, and self-checking”, lower the barrier for non-experts in category selection, threshold tuning and ID assignment, and realize an end-to-end experience of “natural-language target specification → automatic tracking → automatic editing output”.",
@@ -106,6 +106,24 @@ export const researchItems: ResearchItem[] = [
       )
     ],
     tags: [l("Multimodal Agent", "多模态Agent"), l("Computer Vision", "计算机视觉"), l("Graduation Thesis", "毕业论文")]
+  },
+  {
+    id: "faust-violence-nlp",
+    title: l(
+      "An NLP Study of Violent Narrative in Goethe's Faust",
+      "基于 NLP 技术的歌德《浮士德》暴力叙事研究"
+    ),
+    type: l(
+      "Sentiment Mining and Computational Linguistics｜Undergraduate Thesis",
+      "情感挖掘与计算语言学｜本科毕业论文"
+    ),
+    period: "2023.09-2024.04",
+    status: "completed",
+    description: l(
+      "An undergraduate thesis applying natural language processing to examine violent narrative in Goethe's Faust through the lenses of sentiment mining and computational linguistics.",
+      "本科毕业论文以情感挖掘与计算语言学为方法，运用自然语言处理技术研究歌德《浮士德》中的暴力叙事。"
+    ),
+    tags: [l("Natural Language Processing", "自然语言处理"), l("Computational Linguistics", "计算语言学"), l("Undergraduate Thesis", "本科毕业论文")]
   }
 ];
 

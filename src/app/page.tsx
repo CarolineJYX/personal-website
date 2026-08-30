@@ -95,7 +95,7 @@ export default function HomePage() {
           </Reveal>
           <div className="grid gap-6 md:grid-cols-12">
             {featuredProjects.map((project, index) => (
-              <Reveal className={index === 0 ? "md:col-span-7" : index === 1 ? "md:col-span-5" : "md:col-span-12"} key={project.slug}>
+              <Reveal className={index === 0 ? "min-w-0 md:col-span-7" : index === 1 ? "min-w-0 md:col-span-5" : "min-w-0 md:col-span-12"} key={project.slug}>
                 <ProjectCard project={project} size={index === 1 ? "regular" : "large"} />
               </Reveal>
             ))}

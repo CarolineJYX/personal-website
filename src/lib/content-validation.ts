@@ -17,7 +17,7 @@ const forbiddenDisplayTerms = [
   "ACT IV",
   "PRODUCTION ACT"
 ];
-const forbiddenPrivateTerms = ["18019428525", "女｜23岁", "微信"];
+const forbiddenPrivateTerms = ["18019428525", "女｜23岁", "女｜24岁", "24岁", "微信"];
 const contentRoots = { projects, experiences, educationItems, researchItems, awards, profile, contactLinks };
 
 function collectStrings(value: unknown, output: string[] = []): string[] {
