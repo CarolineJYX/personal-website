@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ContactEmailCard } from "@/components/contact-email-card";
+import { LocaleLink } from "@/components/locale-link";
 import { LocalizedText } from "@/components/localized-text";
 import { Reveal } from "@/components/reveal";
 import { Tag } from "@/components/tag";
@@ -53,9 +53,9 @@ export default function ContactPage() {
               <div className="flex items-center justify-between gap-6 py-2">
                 <div>
                   <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-text-secondary">LinkedIn</p>
-                  <Link className="mt-2 block text-base font-semibold underline hover:text-muted-gold" href={profile.linkedin} rel="noreferrer" target="_blank">
+                  <LocaleLink className="mt-2 block text-base font-semibold underline hover:text-muted-gold" href={profile.linkedin} rel="noreferrer" target="_blank">
                     linkedin.com/in/jingyuan-xia
-                  </Link>
+                  </LocaleLink>
                 </div>
                 <span className="rounded-sm bg-success/25 px-2 py-1 font-mono text-[10px] font-semibold uppercase text-[#8fd69e]">
                   <LocalizedText value={{ en: "Active", zh: "可用" }} />
@@ -64,9 +64,9 @@ export default function ContactPage() {
               <div className="flex items-center justify-between gap-6 py-2">
                 <div>
                   <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-text-secondary">GitHub</p>
-                  <Link className="mt-2 block text-base font-semibold underline hover:text-muted-gold" href={profile.github} rel="noreferrer" target="_blank">
+                  <LocaleLink className="mt-2 block text-base font-semibold underline hover:text-muted-gold" href={profile.github} rel="noreferrer" target="_blank">
                     github.com/CarolineJYX
-                  </Link>
+                  </LocaleLink>
                 </div>
                 <span className="rounded-sm bg-success/25 px-2 py-1 font-mono text-[10px] font-semibold uppercase text-[#8fd69e]">
                   <LocalizedText value={{ en: "Active", zh: "可用" }} />
@@ -96,7 +96,7 @@ export default function ContactPage() {
                 <div className="flex flex-wrap gap-2">
                   {profile.focusAreas.map((area) => (
                     <Tag key={localizedKey(area)} tone="accent">
-                      <LocalizedText transform={(value) => value.toUpperCase()} value={area} />
+                      <LocalizedText uppercase value={area} />
                     </Tag>
                   ))}
                 </div>
@@ -119,12 +119,12 @@ export default function ContactPage() {
           aria-label="Adjacent pages"
           className="flex flex-col justify-between gap-6 border-t border-line-dark pt-10 font-mono text-sm font-semibold uppercase tracking-[0.1em] md:flex-row"
         >
-          <Link className="text-text-primary hover:text-muted-gold" href="/experience">
+          <LocaleLink className="text-text-primary hover:text-muted-gold" href="/experience">
             ← <LocalizedText value={{ en: "View Internship Experience", zh: "查看实习经历" }} />
-          </Link>
-          <Link className="text-text-primary hover:text-muted-gold" href="/projects">
+          </LocaleLink>
+          <LocaleLink className="text-text-primary hover:text-muted-gold" href="/projects">
             <LocalizedText value={{ en: "View Selected Projects", zh: "查看精选项目" }} /> →
-          </Link>
+          </LocaleLink>
         </nav>
       </div>
     </main>

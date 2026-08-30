@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocaleLink } from "@/components/locale-link";
 import { LocalizedText } from "@/components/localized-text";
 
 export default function NotFound() {
@@ -11,9 +11,9 @@ export default function NotFound() {
         <h1 className="mt-4 font-display text-5xl">
           <LocalizedText value={{ en: "This page was not found.", zh: "页面不存在。" }} />
         </h1>
-        <Link className="mt-8 inline-flex font-mono text-sm uppercase tracking-[0.12em] text-muted-gold hover:text-text-primary" href="/">
+        <LocaleLink className="mt-8 inline-flex font-mono text-sm uppercase tracking-[0.12em] text-muted-gold hover:text-text-primary" href="/">
           <LocalizedText value={{ en: "Return Home", zh: "返回首页" }} /> →
-        </Link>
+        </LocaleLink>
       </div>
     </main>
   );

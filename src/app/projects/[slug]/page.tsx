@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/button-link";
+import { LocaleLink } from "@/components/locale-link";
 import { LocalizedText } from "@/components/localized-text";
 import { Reveal } from "@/components/reveal";
 import { StatusBadge } from "@/components/status-badge";
@@ -192,14 +192,14 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-gold">
               <LocalizedText value={{ en: "Next Project", zh: "下一个项目" }} /> →
             </p>
-            <Link
+            <LocaleLink
               className="block border-y border-line-dark py-8 transition hover:border-muted-gold"
               href={getProjectCaseHref(nextProject)}
             >
               <h2 className="font-display text-4xl font-normal md:text-6xl">
                 <LocalizedText value={nextProject.title} />
               </h2>
-            </Link>
+            </LocaleLink>
             <ButtonLink href="/projects" variant="text">
               <LocalizedText value={{ en: "Back to Archive", zh: "返回档案" }} />
             </ButtonLink>
