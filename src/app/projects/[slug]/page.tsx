@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/button-link";
 import { LocaleLink } from "@/components/locale-link";
 import { LocalizedText } from "@/components/localized-text";
+import { ProjectVideo } from "@/components/project-video";
 import { Reveal } from "@/components/reveal";
 import { StatusBadge } from "@/components/status-badge";
 import { getLocalizedText, localizedKey, type LocalizedValue } from "@/lib/i18n";
@@ -42,11 +43,22 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   }
 
   const nextProject = getNextProject(project.slug);
+  const statusLabels = {
+    public: { en: "Public case study", zh: "公开案例" },
+    confidential: { en: "Confidential", zh: "保密" },
+    draft: { en: "Draft", zh: "草稿" },
+    planned: { en: "Planned", zh: "计划中" },
+    completed: { en: "Completed", zh: "已完成" },
+    "in-progress": { en: "In progress", zh: "进行中" }
+  };
   const summaryMeta: { label: LocalizedValue; value?: LocalizedValue }[] = [
     { label: { en: "Date", zh: "时间" }, value: project.dateRange ?? project.year },
     { label: { en: "Role", zh: "角色" }, value: project.role },
     { label: { en: "Organization", zh: "组织" }, value: project.organization },
-    { label: { en: "Status", zh: "状态" }, value: project.confidential ? { en: "Public summary", zh: "公开摘要" } : project.status },
+    {
+      label: { en: "Status", zh: "状态" },
+      value: project.confidential ? { en: "Public summary", zh: "公开摘要" } : statusLabels[project.status]
+    },
     { label: { en: "Award", zh: "获奖" }, value: project.award },
     { label: { en: "Launch", zh: "上线状态" }, value: project.launchStatus }
   ];
@@ -75,7 +87,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
                 </p>
                 {project.externalUrl ? (
                   <ButtonLink external href={project.externalUrl}>
-                    <LocalizedText value={{ en: "Visit Live Site", zh: "访问网站" }} />
+                    <LocalizedText value={project.externalLabel ?? { en: "Visit Live Site", zh: "访问网站" }} />
                   </ButtonLink>
                 ) : null}
               </div>
@@ -145,21 +157,22 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
               <div className="grid gap-8">
                 {project.gallery.map((media) => (
                   <Reveal key={media.src}>
-                    <figure className="overflow-hidden rounded border border-line-dark bg-stage-black">
+                    <figure
+                      className={`overflow-hidden rounded border border-line-dark bg-stage-black ${
+                        media.height > media.width ? "mx-auto w-full max-w-3xl" : ""
+                      }`}
+                    >
                       {media.type === "image" ? (
                         <Image
                           alt={getLocalizedText(media.alt)}
-                          className="h-auto w-full"
-                          height={1080}
+                          className="mx-auto h-auto w-full object-contain"
+                          height={media.height}
                           sizes="(min-width: 1280px) 1152px, 100vw"
                           src={media.src}
-                          width={1920}
+                          width={media.width}
                         />
                       ) : (
-                        <video className="aspect-video w-full bg-black" controls playsInline poster={media.poster} preload="metadata">
-                          <source src={media.src} />
-                          <LocalizedText value={{ en: "Your browser does not support video playback.", zh: "你的浏览器不支持视频播放。" }} />
-                        </video>
+                        <ProjectVideo media={media} />
                       )}
                       {media.caption ? (
                         <figcaption className="border-t border-line-dark px-5 py-4 text-sm leading-6 text-text-secondary">
@@ -175,7 +188,13 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
               <Reveal>
                 <div className="flex flex-wrap gap-4">
                   {project.resources.map((resource) => (
-                    <ButtonLink external href={resource.href} key={resource.href} variant="secondary">
+                    <ButtonLink
+                      download={resource.behavior === "download" ? resource.downloadName ?? true : undefined}
+                      external={resource.behavior !== "download"}
+                      href={resource.href}
+                      key={`${resource.href}-${resource.behavior ?? "open"}-${localizedKey(resource.label)}`}
+                      variant="secondary"
+                    >
                       <LocalizedText value={resource.label} />
                     </ButtonLink>
                   ))}

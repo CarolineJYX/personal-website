@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { educationItems, researchItems } from "@/data/education";
 import { experiences } from "@/data/experience";
@@ -89,9 +89,89 @@ describe("content validation", () => {
 
   it("uses the latest project title and date ranges without adding a seventh case", () => {
     expect(projects).toHaveLength(6);
+    expect(projects.map((project) => project.slug)).toEqual([
+      "tonight-wish-card",
+      "petsona",
+      "global-top-star",
+      "loom",
+      "living-chronicles",
+      "curious-conch"
+    ]);
+    expect(projects.find((project) => project.slug === "tonight-wish-card")?.title.zh).toBe(
+      "今夜星愿卡：你的夜生活即时推荐助手"
+    );
+    expect(projects.find((project) => project.slug === "tonight-wish-card")?.dateRange).toBe("2026.07-2026.08");
     expect(projects.find((project) => project.slug === "petsona")?.dateRange).toBe("2026.02-2026.06");
-    expect(projects.find((project) => project.slug === "global-top-star")?.title.zh).toContain("你一定要成为全球顶流");
+    expect(projects.find((project) => project.slug === "global-top-star")?.title.zh).toBe("你一定要成为全球顶流：AI 互动影游");
     expect(projects.find((project) => project.slug === "global-top-star")?.dateRange).toBe("2026.06-2026.07");
+    expect(projects.find((project) => project.slug === "loom")?.dateRange).toBe("2026");
     expect(projects.find((project) => project.slug === "curious-conch")?.dateRange).toBe("2026.02-2026.05");
+  });
+
+  it("keeps updated case studies complete and ordered", () => {
+    const sectionOrder = ["overview", "role", "problem", "solution", "flow", "outcome"];
+
+    for (const slug of ["tonight-wish-card", "petsona", "global-top-star", "loom", "living-chronicles"]) {
+      const project = projects.find((candidate) => candidate.slug === slug);
+
+      expect(project?.sections.map((item) => item.id)).toEqual(sectionOrder);
+      expect(project?.sections.every((item) => item.body.every((paragraph) => paragraph.en && paragraph.zh))).toBe(true);
+    }
+  });
+
+  it("publishes only approved external project links", () => {
+    const externalLinks = projects.flatMap((project) => [project.externalUrl, ...(project.resources?.map((item) => item.href) ?? [])])
+      .filter((href): href is string => Boolean(href))
+      .filter((href) => /^https?:\/\//.test(href));
+
+    expect(externalLinks).toEqual(["https://app.familyecho.sg"]);
+  });
+
+  it("references present media and separates view/download PDF actions", () => {
+    const publicRoot = join(process.cwd(), "public");
+
+    for (const project of projects) {
+      for (const path of [project.coverImage, ...(project.gallery?.flatMap((media) => [media.src, media.poster]) ?? [])]) {
+        if (path) {
+          expect(existsSync(join(publicRoot, path))).toBe(true);
+        }
+      }
+
+      const pdfResources = project.resources?.filter((resource) => resource.type === "pdf") ?? [];
+      if (pdfResources.length) {
+        expect(pdfResources.map((resource) => resource.behavior)).toEqual(["open", "download"]);
+        expect(new Set(pdfResources.map((resource) => resource.href)).size).toBe(1);
+        expect(existsSync(join(publicRoot, pdfResources[0].href))).toBe(true);
+      }
+    }
+  });
+
+  it("keeps videos web-compatible in size and metadata declarations", () => {
+    const videos = projects.flatMap((project) => project.gallery?.filter((media) => media.type === "video") ?? []);
+
+    expect(videos).toHaveLength(4);
+    expect(videos.every((video) => video.src.endsWith(".mp4") && video.poster && video.preview)).toBe(true);
+    expect(videos.every((video) => Math.max(video.width, video.height) <= 1280)).toBe(true);
+    expect(videos.every((video) => statSync(join(process.cwd(), "public", video.src)).size < 45 * 1024 * 1024)).toBe(true);
+  });
+
+  it("publishes the approved status, roles, and resources", () => {
+    const tonight = projects.find((project) => project.slug === "tonight-wish-card");
+    const petsona = projects.find((project) => project.slug === "petsona");
+    const globalTopStar = projects.find((project) => project.slug === "global-top-star");
+    const loom = projects.find((project) => project.slug === "loom");
+    const living = projects.find((project) => project.slug === "living-chronicles");
+
+    expect(tonight?.role?.zh).toBe("产品经理");
+    expect(tonight?.status).toBe("completed");
+    expect(tonight?.gallery?.filter((media) => media.type === "video")).toHaveLength(3);
+    expect(petsona?.status).toBe("public");
+    expect(globalTopStar?.status).toBe("completed");
+    expect(loom?.role?.zh).toBe("产品经理、前端开发");
+    expect(loom?.launchStatus?.zh).toBe("已完成 Demo");
+    expect(living?.status).toBe("public");
+    expect(living?.launchStatus?.zh).toBe("已上线");
+    expect(living?.externalUrl).toBe("https://app.familyecho.sg");
+    expect(living?.externalLabel?.en).toBe("Family Echo Workshop");
   });
 });

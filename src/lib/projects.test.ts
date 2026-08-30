@@ -9,8 +9,8 @@ describe("project lookup", () => {
     expect(project ? getLocalizedText(project.title) : undefined).toBe("Petsona: A Social App for Your Pet's AI Persona");
   });
 
-  it("links Petsona to its live site", () => {
-    expect(getProjectBySlug("petsona")?.externalUrl).toBe("http://43.135.181.240/");
+  it("hides Petsona's non-HTTPS deployment", () => {
+    expect(getProjectBySlug("petsona")?.externalUrl).toBeUndefined();
   });
 
   it("keeps Petsona case navigation internal", () => {

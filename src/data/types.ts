@@ -25,7 +25,11 @@ export type ProjectMedia = {
   type: "image" | "video";
   src: string;
   alt: LocalizedString;
+  width: number;
+  height: number;
   poster?: string;
+  preview?: boolean;
+  downloadLabel?: LocalizedString;
   caption?: LocalizedString;
 };
 
@@ -33,6 +37,8 @@ export type ProjectResource = {
   label: LocalizedString;
   href: string;
   type: "pdf" | "document" | "prototype" | "website";
+  behavior?: "open" | "download";
+  downloadName?: string;
 };
 
 export type DecisionItem = {
@@ -52,6 +58,7 @@ export type Project = {
   year?: string;
   dateRange?: string;
   externalUrl?: string;
+  externalLabel?: LocalizedString;
   coverImage?: string;
   coverAlt?: LocalizedString;
   gallery?: ProjectMedia[];

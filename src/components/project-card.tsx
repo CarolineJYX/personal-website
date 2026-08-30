@@ -11,9 +11,10 @@ type ProjectCardProps = {
   project: Project;
   size?: "large" | "regular";
   compact?: boolean;
+  priority?: boolean;
 };
 
-export function ProjectCard({ project, size = "regular", compact = false }: ProjectCardProps) {
+export function ProjectCard({ project, size = "regular", compact = false, priority = false }: ProjectCardProps) {
   const wide = size === "large";
 
   return (
@@ -35,6 +36,7 @@ export function ProjectCard({ project, size = "regular", compact = false }: Proj
             alt={project.coverAlt?.en ?? project.title.en}
             className="object-cover transition duration-medium group-hover:scale-[1.02] group-hover:brightness-110"
             fill
+            priority={priority}
             sizes={wide ? "(min-width: 768px) 58vw, 100vw" : "(min-width: 768px) 42vw, 100vw"}
             src={project.coverImage}
           />
@@ -89,5 +91,5 @@ export function ProjectCard({ project, size = "regular", compact = false }: Proj
 }
 
 export function ProjectArchiveCard({ project, index }: { project: Project; index: number }) {
-  return <ProjectCard project={project} size={index % 3 === 1 ? "regular" : "large"} />;
+  return <ProjectCard priority={index === 0} project={project} size={index % 3 === 1 ? "regular" : "large"} />;
 }

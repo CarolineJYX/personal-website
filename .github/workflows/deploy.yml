@@ -65,7 +65,20 @@ jobs:
       - name: Verify production
         run: |
           curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/ >/dev/null
-          curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/projects >/dev/null
-          curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/projects/tonight-wish-card >/dev/null
-          curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/projects/loom >/dev/null
+          curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/zh >/dev/null
+          curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/en >/dev/null
+          for slug in tonight-wish-card petsona global-top-star loom living-chronicles; do
+            curl --fail --location --retry 5 --retry-delay 3 --max-time 30 "https://www.jingyuanxia.com/zh/projects/${slug}" >/dev/null
+            curl --fail --location --retry 5 --retry-delay 3 --max-time 30 "https://www.jingyuanxia.com/en/projects/${slug}" >/dev/null
+          done
+          for asset in \
+            documents/projects/petsona.pdf \
+            documents/projects/global-top-star.pdf \
+            documents/projects/loom.pdf \
+            documents/projects/living-chronicles.pdf \
+            videos/projects/tonight-wish-card/product-demo.mp4 \
+            videos/projects/loom/demo.mp4; do
+            curl --fail --silent --show-error --range 0-1023 --retry 5 --retry-delay 3 --max-time 30 "https://www.jingyuanxia.com/${asset}" >/dev/null
+          done
+          curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/robots.txt >/dev/null
           curl --fail --location --retry 5 --retry-delay 3 --max-time 30 https://www.jingyuanxia.com/sitemap.xml >/dev/null

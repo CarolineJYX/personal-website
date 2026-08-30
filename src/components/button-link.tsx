@@ -7,9 +7,10 @@ type ButtonLinkProps = {
   variant?: "primary" | "secondary" | "text";
   className?: string;
   external?: boolean;
+  download?: string | boolean;
 };
 
-export function ButtonLink({ href, children, variant = "primary", className, external }: ButtonLinkProps) {
+export function ButtonLink({ href, children, variant = "primary", className, external, download }: ButtonLinkProps) {
   const base =
     "group inline-flex min-h-11 items-center justify-center gap-2 rounded-sm font-body text-sm font-semibold transition duration-medium ease-enter focus-visible:outline-muted-gold";
   const variants = {
@@ -25,6 +26,7 @@ export function ButtonLink({ href, children, variant = "primary", className, ext
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
+      download={download}
     >
       <span>{children}</span>
       <span aria-hidden="true" className="transition-transform duration-medium ease-enter group-hover:translate-x-1">

@@ -87,7 +87,17 @@ export function validateProjectSlugs(): boolean {
 }
 
 export function findInvalidProjectMediaPaths(): string[] {
-  return projects.flatMap((project) => [project.coverImage, ...(project.gallery?.map((media) => media.src) ?? [])])
+  return projects.flatMap((project) => [
+    project.coverImage,
+    ...(project.gallery?.flatMap((media) => [media.src, media.poster]) ?? []),
+    ...(project.resources?.map((resource) => resource.href) ?? [])
+  ])
     .filter((path): path is string => Boolean(path))
-    .filter((path) => !path.startsWith("/images/") && !path.startsWith("/media/"));
+    .filter(
+      (path) =>
+        !path.startsWith("/images/") &&
+        !path.startsWith("/videos/") &&
+        !path.startsWith("/documents/") &&
+        !path.startsWith("https://")
+    );
 }
