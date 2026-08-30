@@ -10,14 +10,10 @@ describe("homepage content", () => {
     ]);
   });
 
-  it("keeps the structured strengths complete in both locales", () => {
-    expect(profile.homeStrengths).toHaveLength(4);
-
-    for (const strength of profile.homeStrengths) {
-      expect(strength.title.en).toBeTruthy();
-      expect(strength.title.zh).toBeTruthy();
-      expect(strength.description.en).toBeTruthy();
-      expect(strength.description.zh).toBeTruthy();
-    }
+  it("uses one complete reviewed strengths paragraph in both locales", () => {
+    expect(profile.strengths[0].en).toContain("pre-training");
+    expect(profile.strengths[0].en).toContain("Context and Harness Engineering");
+    expect(profile.strengths[0].zh).toContain("Pre-training");
+    expect(profile.strengths[0].zh).toContain("Context / Harness Engineering");
   });
 });

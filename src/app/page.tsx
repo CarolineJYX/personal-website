@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ButtonLink } from "@/components/button-link";
-import { ExperienceTimeline } from "@/components/experience-timeline";
 import { HomeEducationResearchToggle } from "@/components/home-education-research-toggle";
+import { HomeExperienceCards } from "@/components/home-experience-cards";
 import { LocalizedText } from "@/components/localized-text";
 import { LocaleLink } from "@/components/locale-link";
 import { ProjectCard } from "@/components/project-card";
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <main id="main-content">
-      <section className="stage-glow bg-stage-black pt-16 text-text-primary md:pt-20">
-        <div className="site-shell grid items-center gap-10 py-10 md:py-12 lg:grid-cols-[minmax(0,3fr)_minmax(320px,2fr)] lg:gap-14 xl:gap-16">
+      <section className="stage-glow bg-stage-black pt-16 text-text-primary md:pt-20 lg:min-h-[90svh]">
+        <div className="site-shell grid items-center gap-10 py-10 md:py-12 lg:min-h-[calc(90svh-5rem)] lg:grid-cols-[minmax(0,3fr)_minmax(320px,2fr)] lg:gap-14 xl:gap-16">
           <Reveal className="flex max-w-4xl flex-col items-start gap-6">
             <div>
               <h1 className="text-balance font-display text-[48px] font-medium leading-[0.98] text-text-primary md:text-[68px] xl:text-[76px]">
@@ -32,22 +32,13 @@ export default function HomePage() {
                 <LocalizedText value={profile.role} />
               </p>
             </div>
-            <div className="max-w-3xl space-y-3">
+            <div className="max-w-3xl space-y-4">
               <p className="text-lg font-medium leading-7 text-text-primary md:text-xl md:leading-8">
                 <LocalizedText value={profile.statement} />
               </p>
-            </div>
-            <div className="grid w-full max-w-3xl gap-x-6 gap-y-5 sm:grid-cols-2">
-              {profile.homeStrengths.map((strength) => (
-                <article className="border-l border-line-dark pl-4" key={strength.title.en}>
-                  <h2 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-gold">
-                    <LocalizedText value={strength.title} />
-                  </h2>
-                  <p className="mt-2 text-sm leading-6 text-text-secondary">
-                    <LocalizedText value={strength.description} />
-                  </p>
-                </article>
-              ))}
+              <p className="text-base leading-7 text-text-secondary">
+                <LocalizedText value={profile.strengths[0]} />
+              </p>
             </div>
             <div className="flex flex-wrap gap-3">
               <ButtonLink external href={profile.linkedin}>
@@ -84,7 +75,7 @@ export default function HomePage() {
             />
           </Reveal>
           <Reveal>
-            <ExperienceTimeline items={homepageExperiences} />
+            <HomeExperienceCards items={homepageExperiences} />
           </Reveal>
           <div className="flex justify-center">
             <ButtonLink className="text-ink" href="/experience" variant="text">
