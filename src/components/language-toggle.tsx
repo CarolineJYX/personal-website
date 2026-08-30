@@ -1,55 +1,66 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { DEFAULT_LOCALE, isLocale, LANGUAGE_STORAGE_KEY, type Locale } from "@/lib/i18n";
+import { useLocale } from "@/components/locale-provider";
 import { cn } from "@/lib/cn";
+import { buildLocaleSwitchHref, type Locale } from "@/lib/i18n";
 
-function applyLocale(locale: Locale) {
-  document.documentElement.dataset.locale = locale;
-  document.documentElement.lang = locale === "zh" ? "zh-CN" : "en";
-}
-
-export function LanguageToggle() {
-  const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE);
+export function LanguageToggle({ variant = "default" }: { variant?: "default" | "paper" }) {
+  const locale = useLocale();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [hash, setHash] = useState("");
 
   useEffect(() => {
-    const saved = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    const initialLocale = isLocale(saved) ? saved : DEFAULT_LOCALE;
-    setLocale(initialLocale);
-    applyLocale(initialLocale);
-  }, []);
+    const syncHash = () => setHash(window.location.hash);
 
-  function selectLocale(nextLocale: Locale) {
-    setLocale(nextLocale);
-    applyLocale(nextLocale);
-    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, nextLocale);
-  }
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
 
-  function renderButton(value: Locale, label: string, ariaLabel: string) {
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, [pathname]);
+
+  const query = searchParams.toString();
+
+  function renderLink(value: Locale, label: string, ariaLabel: string) {
+    const href = buildLocaleSwitchHref(pathname, value, query, hash);
+    const selected = locale === value;
+
     return (
-      <button
+      <Link
+        aria-current={selected ? "page" : undefined}
         aria-label={ariaLabel}
-        aria-pressed={locale === value}
         className={cn(
-          "min-h-11 min-w-11 px-3 transition",
-          locale === value ? "bg-muted-gold text-stage-black" : "text-text-secondary hover:text-text-primary"
+          "min-h-11 min-w-11 px-3 py-[14px] text-center transition",
+          variant === "paper"
+            ? selected
+              ? "bg-[#303331] text-white"
+              : "text-[#5c615e] hover:bg-[#ecece7] hover:text-[#232624]"
+            : selected
+              ? "bg-muted-gold text-stage-black"
+              : "text-text-secondary hover:text-text-primary"
         )}
-        onClick={() => selectLocale(value)}
-        type="button"
+        href={href}
+        hrefLang={value === "zh" ? "zh-CN" : "en"}
+        lang={value === "zh" ? "zh-CN" : "en"}
       >
         {label}
-      </button>
+      </Link>
     );
   }
 
   return (
-    <div
+    <nav
       aria-label="Language switcher"
-      className="inline-flex min-h-11 items-center overflow-hidden rounded-sm border border-line-dark bg-line-dark font-mono text-[11px] uppercase tracking-[0.12em]"
-      role="group"
+      className={cn(
+        "inline-flex min-h-11 items-center overflow-hidden font-mono text-[11px] uppercase tracking-[0.12em]",
+        variant === "paper" ? "border border-[#777c78]/45 bg-[#fafaf7]/90" : "rounded-sm border border-line-dark bg-line-dark"
+      )}
     >
-      {renderButton("en", "EN", "Switch to English")}
-      {renderButton("zh", "中", "切换到中文")}
-    </div>
+      {renderLink("en", "EN", "Switch to English")}
+      {renderLink("zh", "中", "切换到中文")}
+    </nav>
   );
 }

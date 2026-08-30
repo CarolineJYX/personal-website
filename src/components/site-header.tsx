@@ -5,8 +5,10 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LanguageToggle } from "@/components/language-toggle";
 import { LocalizedText } from "@/components/localized-text";
+import { useLocale } from "@/components/locale-provider";
 import { profile } from "@/data/profile";
 import { cn } from "@/lib/cn";
+import { localizePath, stripLocaleFromPathname } from "@/lib/i18n";
 
 const navItems = [
   { label: { en: "Internship Experience", zh: "实习经历" }, href: "/experience" },
@@ -25,6 +27,8 @@ function isCurrentPath(pathname: string, href: string): boolean {
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const locale = useLocale();
+  const contentPathname = stripLocaleFromPathname(pathname);
   const [isOpen, setIsOpen] = useState(false);
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -57,14 +61,14 @@ export function SiteHeader() {
         <Link
           aria-label="Back to home"
           className="font-display text-xl font-semibold text-text-primary transition hover:text-muted-gold md:text-2xl"
-          href="/"
+          href={localizePath("/", locale)}
         >
           <LocalizedText value={profile.name} />
         </Link>
 
         <nav aria-label="Primary navigation" className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => {
-            const current = isCurrentPath(pathname, item.href);
+            const current = isCurrentPath(contentPathname, item.href);
             return (
               <Link
                 aria-current={current ? "page" : undefined}
@@ -72,7 +76,7 @@ export function SiteHeader() {
                   "font-body text-sm font-medium transition hover:text-text-primary",
                   current ? "text-text-primary" : "text-text-secondary"
                 )}
-                href={item.href}
+                href={localizePath(item.href, locale)}
                 key={item.href}
               >
                 <LocalizedText value={item.label} />
@@ -114,7 +118,7 @@ export function SiteHeader() {
       >
         <nav aria-label="Mobile navigation" className="site-shell flex flex-col gap-2 py-6">
           {navItems.map((item, index) => {
-            const current = isCurrentPath(pathname, item.href);
+            const current = isCurrentPath(contentPathname, item.href);
             return (
               <Link
                 aria-current={current ? "page" : undefined}
@@ -122,7 +126,7 @@ export function SiteHeader() {
                   "min-h-11 border-b border-line-dark py-3 font-display text-3xl transition",
                   current ? "text-muted-gold" : "text-text-primary"
                 )}
-                href={item.href}
+                href={localizePath(item.href, locale)}
                 key={item.href}
                 ref={index === 0 ? firstMobileLinkRef : undefined}
               >
@@ -130,8 +134,8 @@ export function SiteHeader() {
               </Link>
             );
           })}
-          {profile.resumeUrl ? (
-            <Link className="mt-4 min-h-11 font-mono text-xs uppercase tracking-[0.12em] text-muted-gold" href={profile.resumeUrl}>
+          {profile.resumeUrls[locale] ? (
+            <Link className="mt-4 min-h-11 font-mono text-xs uppercase tracking-[0.12em] text-muted-gold" href={profile.resumeUrls[locale]}>
               <LocalizedText value={{ en: "Resume", zh: "简历" }} /> →
             </Link>
           ) : null}

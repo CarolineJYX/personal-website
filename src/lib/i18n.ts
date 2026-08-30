@@ -1,5 +1,5 @@
 export const DEFAULT_LOCALE = "en";
-export const LANGUAGE_STORAGE_KEY = "jyx-language";
+export const DEFAULT_ROUTE_LOCALE = "zh";
 export const LOCALES = ["en", "zh"] as const;
 
 export type Locale = (typeof LOCALES)[number];
@@ -31,4 +31,51 @@ export function getLocalizedText(value: LocalizedValue, locale: Locale = DEFAULT
 
 export function localizedKey(value: LocalizedValue): string {
   return getLocalizedText(value, DEFAULT_LOCALE);
+}
+
+export function getLocaleFromPathname(pathname: string): Locale | undefined {
+  const segment = pathname.split("/").filter(Boolean)[0];
+
+  return isLocale(segment) ? segment : undefined;
+}
+
+export function stripLocaleFromPathname(pathname: string): string {
+  const locale = getLocaleFromPathname(pathname);
+
+  if (!locale) {
+    return pathname || "/";
+  }
+
+  const stripped = pathname.replace(new RegExp(`^/${locale}(?=/|$)`), "");
+
+  return stripped || "/";
+}
+
+export function localizePath(pathname: string, locale: Locale): string {
+  if (!pathname.startsWith("/") || pathname.startsWith("//")) {
+    return pathname;
+  }
+
+  const pathOnly = pathname.split(/[?#]/, 1)[0];
+
+  if (/\.[a-z0-9]+$/i.test(pathOnly) || pathOnly.startsWith("/_next/") || pathOnly.startsWith("/api/")) {
+    return pathname;
+  }
+
+  if (pathname === "/") {
+    return `/${locale}`;
+  }
+
+  return `/${locale}${stripLocaleFromPathname(pathname)}`;
+}
+
+export function replacePathLocale(pathname: string, locale: Locale): string {
+  return localizePath(pathname, locale);
+}
+
+export function buildLocaleSwitchHref(pathname: string, locale: Locale, query = "", hash = ""): string {
+  const normalizedQuery = query ? `?${query.replace(/^\?/, "")}` : "";
+  const normalizedHash = hash ? `#${hash.replace(/^#/, "")}` : "";
+
+  return `${replacePathLocale(pathname, locale)}${normalizedQuery}${normalizedHash}`;
 }

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocaleLink } from "@/components/locale-link";
 import type { Project } from "@/data/types";
 import { cn } from "@/lib/cn";
 import { getProjectCaseHref } from "@/lib/projects";
@@ -16,7 +16,7 @@ export function ProjectCard({ project, size = "regular" }: ProjectCardProps) {
   const wide = size === "large";
 
   return (
-    <Link
+    <LocaleLink
       className={cn(
         "group flex h-full flex-col overflow-hidden rounded border border-line-dark bg-stage-elevated transition duration-medium ease-enter hover:border-muted-gold",
         wide ? "md:col-span-7" : "md:col-span-5"
@@ -75,7 +75,7 @@ export function ProjectCard({ project, size = "regular" }: ProjectCardProps) {
           </div>
         </div>
       </div>
-    </Link>
+    </LocaleLink>
   );
 }
 

@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { LOCALES, localizePath } from "@/lib/i18n";
 import { getProjectSlugs } from "@/lib/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -6,10 +7,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/experience", "/projects", "/education", "/contact"];
   const projectRoutes = getProjectSlugs().map((slug) => `/projects/${slug}`);
 
-  return [...routes, ...projectRoutes].map((route) => ({
-    url: `${base}${route}`,
-    lastModified: new Date("2026-07-27"),
-    changeFrequency: "monthly",
-    priority: route === "" ? 1 : 0.7
-  }));
+  return LOCALES.flatMap((locale) =>
+    [...routes, ...projectRoutes].map((route) => ({
+      url: `${base}${localizePath(route || "/", locale)}`,
+      lastModified: new Date("2026-08-30"),
+      changeFrequency: "monthly" as const,
+      priority: route === "" ? 1 : 0.7,
+      alternates: {
+        languages: {
+          en: `${base}${localizePath(route || "/", "en")}`,
+          "zh-CN": `${base}${localizePath(route || "/", "zh")}`
+        }
+      }
+    }))
+  );
 }

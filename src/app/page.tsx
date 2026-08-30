@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { ButtonLink } from "@/components/button-link";
 import { ExperienceTimeline } from "@/components/experience-timeline";
 import { HomeEducationResearchToggle } from "@/components/home-education-research-toggle";
 import { LocalizedText } from "@/components/localized-text";
+import { LocaleLink } from "@/components/locale-link";
 import { ProjectCard } from "@/components/project-card";
+import { ResumeButton } from "@/components/resume-button";
 import { Reveal } from "@/components/reveal";
 import { SectionHeader } from "@/components/section-header";
 import { experiences } from "@/data/experience";
@@ -25,7 +26,7 @@ export default function HomePage() {
           <Reveal className="flex max-w-4xl flex-col items-start gap-8">
             <div>
               <h1 className="text-balance font-display text-[52px] font-medium leading-[0.98] text-text-primary md:text-[80px]">
-                <LocalizedText transform={(value) => value.toUpperCase()} value={profile.name} />
+                <LocalizedText uppercase value={profile.name} />
               </h1>
               <p className="mt-3 font-display text-3xl text-text-secondary">
                 <LocalizedText value={profile.role} />
@@ -46,11 +47,7 @@ export default function HomePage() {
               <ButtonLink external href={profile.github} variant="secondary">
                 GitHub
               </ButtonLink>
-              {profile.resumeUrl ? (
-                <ButtonLink href={profile.resumeUrl} variant="secondary">
-                  <LocalizedText value={{ en: "Read Resume", zh: "查看简历" }} />
-                </ButtonLink>
-              ) : null}
+              <ResumeButton />
             </div>
           </Reveal>
           <Reveal className="w-full max-w-[360px] justify-self-center sm:max-w-[400px] lg:max-w-none lg:justify-self-end">
@@ -139,9 +136,9 @@ export default function HomePage() {
           <ButtonLink href={`mailto:${profile.email}`}>
             <LocalizedText value={{ en: "Send Email", zh: "发送邮件" }} />
           </ButtonLink>
-          <Link className="font-mono text-xs uppercase tracking-[0.14em] text-text-secondary hover:text-muted-gold" href="/contact">
+          <LocaleLink className="font-mono text-xs uppercase tracking-[0.14em] text-text-secondary hover:text-muted-gold" href="/contact">
             <LocalizedText value={{ en: "Contact Page", zh: "联系页面" }} /> →
-          </Link>
+          </LocaleLink>
         </div>
       </section>
     </main>

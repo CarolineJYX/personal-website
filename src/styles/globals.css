@@ -121,22 +121,6 @@ a {
   outline-offset: 4px;
 }
 
-[data-i18n="zh"] {
-  display: none;
-}
-
-html[data-locale="zh"] [data-i18n="en"] {
-  display: none;
-}
-
-html[data-locale="zh"] [data-i18n="zh"] {
-  display: inline;
-}
-
-html[data-locale="en"] [data-i18n="zh"] {
-  display: none;
-}
-
 .site-shell {
   width: min(100% - (var(--page-gutter-mobile) * 2), var(--content-max));
   margin-inline: auto;

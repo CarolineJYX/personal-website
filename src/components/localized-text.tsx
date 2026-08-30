@@ -1,20 +1,17 @@
+"use client";
+
 import type { LocalizedValue } from "@/lib/i18n";
-import { isLocalizedString } from "@/lib/i18n";
+import { getLocalizedText } from "@/lib/i18n";
+import { useLocale } from "@/components/locale-provider";
 
 type LocalizedTextProps = {
   value: LocalizedValue;
-  transform?: (value: string) => string;
+  uppercase?: boolean;
 };
 
-export function LocalizedText({ value, transform }: LocalizedTextProps) {
-  if (!isLocalizedString(value)) {
-    return <>{transform ? transform(value) : value}</>;
-  }
+export function LocalizedText({ value, uppercase = false }: LocalizedTextProps) {
+  const locale = useLocale();
+  const text = getLocalizedText(value, locale);
 
-  return (
-    <>
-      <span data-i18n="en">{transform ? transform(value.en) : value.en}</span>
-      <span data-i18n="zh">{transform ? transform(value.zh) : value.zh}</span>
-    </>
-  );
+  return <>{uppercase ? text.toUpperCase() : text}</>;
 }

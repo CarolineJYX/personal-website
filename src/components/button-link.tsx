@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocaleLink } from "@/components/locale-link";
 import { cn } from "@/lib/cn";
 
 type ButtonLinkProps = {
@@ -20,7 +20,7 @@ export function ButtonLink({ href, children, variant = "primary", className, ext
   };
 
   return (
-    <Link
+    <LocaleLink
       className={cn(base, variants[variant], className)}
       href={href}
       target={external ? "_blank" : undefined}
@@ -30,6 +30,6 @@ export function ButtonLink({ href, children, variant = "primary", className, ext
       <span aria-hidden="true" className="transition-transform duration-medium ease-enter group-hover:translate-x-1">
         →
       </span>
-    </Link>
+    </LocaleLink>
   );
 }

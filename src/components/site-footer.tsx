@@ -1,11 +1,19 @@
+"use client";
+
 import Link from "next/link";
+import { useLocale } from "@/components/locale-provider";
 import { contactLinks, profile } from "@/data/profile";
 import { filterRenderableLinks, isExternalHref } from "@/lib/links";
 import { localizedKey } from "@/lib/i18n";
 import { LocalizedText } from "./localized-text";
 
 export function SiteFooter() {
-  const links = filterRenderableLinks(contactLinks);
+  const locale = useLocale();
+  const resumeHref = profile.resumeUrls[locale];
+  const links = filterRenderableLinks([
+    ...contactLinks,
+    ...(resumeHref ? [{ label: { en: "Resume", zh: "简历" }, href: resumeHref, external: false }] : [])
+  ]);
 
   return (
     <footer className="border-t border-line-dark bg-stage-black py-12 text-text-secondary md:py-16">

@@ -1,3 +1,4 @@
+import type { Locale } from "@/lib/i18n";
 import type { LinkItem } from "./types";
 
 const l = (en: string, zh: string) => ({ en, zh });
@@ -42,7 +43,7 @@ export const profile = {
   email: "caroline.jy.xia@gmail.com",
   linkedin: "https://www.linkedin.com/in/jingyuan-xia",
   github: "https://github.com/CarolineJYX",
-  resumeUrl: undefined as string | undefined
+  resumeUrls: {} as Partial<Record<Locale, string>>
 };
 
 export const contactLinks: LinkItem[] = [
@@ -60,10 +61,5 @@ export const contactLinks: LinkItem[] = [
     label: { en: "GitHub", zh: "GitHub" },
     href: profile.github,
     external: true
-  },
-  {
-    label: { en: "Resume", zh: "简历" },
-    href: profile.resumeUrl,
-    external: false
   }
 ];
