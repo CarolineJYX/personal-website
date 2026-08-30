@@ -1,19 +1,11 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { contactLinks, profile } from "@/data/profile";
 import { filterRenderableLinks, isExternalHref } from "@/lib/links";
 import { localizedKey } from "@/lib/i18n";
 import { LocalizedText } from "./localized-text";
 
 export function SiteFooter() {
-  const pathname = usePathname();
   const links = filterRenderableLinks(contactLinks);
-
-  if (pathname === "/interactive") {
-    return null;
-  }
 
   return (
     <footer className="border-t border-line-dark bg-stage-black py-12 text-text-secondary md:py-16">
